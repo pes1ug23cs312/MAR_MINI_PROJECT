@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.bak
+*.log
+*.swp
+*.tmp
+*.Zone.Identifier
