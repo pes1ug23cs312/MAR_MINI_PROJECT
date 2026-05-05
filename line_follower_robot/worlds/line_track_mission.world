@@ -1,0 +1,103 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="line_track_mission_world">
+
+    <physics type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <direction>0.3 0.2 -1.0</direction>
+      <diffuse>0.85 0.85 0.85 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>14 14</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>14 14</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/White</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="line_path">
+      <static>true</static>
+      <link name="line_link">
+
+        <!-- Segment 1: Vertical DOWN (x=0, y from 2.5 to -2.5) -->
+        <visual name="segment_vertical_1">
+          <pose>0.0 0.0 0.001 0 0 1.5708</pose>
+          <geometry><box><size>5.0 0.18 0.001</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+        </visual>
+
+        <!-- Segment 2: Horizontal LEFT (y=-2.5, x from -2.5 to 2.5) -->
+        <visual name="segment_horizontal">
+          <pose>0.0 -2.5 0.001 0 0 0</pose>
+          <geometry><box><size>5.0 0.18 0.001</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+        </visual>
+
+        <!-- Segment 3: Vertical DOWN AGAIN (x=2.5, y from -2.5 to -5.0) -->
+        <visual name="segment_vertical_2">
+          <pose>2.5 -3.75 0.001 0 0 1.5708</pose>
+          <geometry><box><size>2.5 0.18 0.001</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="obstacle_1">
+      <static>true</static>
+      <pose>0.0 -1.2 0.16 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.30 0.30 0.32</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.30 0.30 0.32</size></box></geometry><material><ambient>0.95 0.2 0.2 1</ambient><diffuse>0.95 0.2 0.2 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="obstacle_2">
+      <static>true</static>
+      <pose>2.5 -2.8 0.16 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.30 0.30 0.32</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.30 0.30 0.32</size></box></geometry><material><ambient>0.95 0.2 0.2 1</ambient><diffuse>0.95 0.2 0.2 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="goal_marker">
+      <static>true</static>
+      <pose>2.5 -5.0 0.01 0 0 0</pose>
+      <link name="goal_link">
+        <visual name="goal_visual">
+          <geometry><cylinder><radius>0.12</radius><length>0.02</length></cylinder></geometry>
+          <material><ambient>0.1 0.7 0.2 1</ambient><diffuse>0.1 0.7 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>
